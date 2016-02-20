@@ -1,6 +1,7 @@
 package com.kpoda.ping;
 
 import java.io.IOException;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -48,7 +49,7 @@ public class CreateChargeServlet extends HttpServlet {
 
 		Pingpp.apiKey = APP_KEY;
 		Map<String, Object> chargeParams = new HashMap<String, Object>();
-		chargeParams.put("order_no", para.get("order_no"));
+		chargeParams.put("order_no", para.get("order_no")==null?"no"+Calendar.getInstance().getTimeInMillis():para.get("order_no"));
 		chargeParams.put("amount", ((Double)para.get("amount")).intValue());
 		Map<String, String> app = new HashMap<String, String>();
 		app.put("id", APP_ID);
@@ -75,7 +76,7 @@ public class CreateChargeServlet extends HttpServlet {
 		
 		if(para.get("channel").equals("wx_pub")){
 			Map<String, String> extra = new HashMap<String, String>();
-		    extra.put("open_id", para.get("open_id").toString());
+		    extra.put("open_id", para.get("open_id").toString()==null?"gzboguan":para.get("open_id").toString());
 		    chargeParams.put("extra",extra);
 		    
 		}
